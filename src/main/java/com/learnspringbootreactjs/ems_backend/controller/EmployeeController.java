@@ -3,6 +3,8 @@ package com.learnspringbootreactjs.ems_backend.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,12 @@ public class EmployeeController {
 		EmployeeDto savedempdto = empService.createEmployee(empDto);
 		return new ResponseEntity<>(savedempdto, HttpStatus.CREATED);
 		
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") Long empId){
+		EmployeeDto empDto = empService.getEmployee(empId);
+		return ResponseEntity.ok(empDto);
 	}
 
 }
