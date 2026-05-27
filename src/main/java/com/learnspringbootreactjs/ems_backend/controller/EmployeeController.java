@@ -13,7 +13,7 @@ import com.learnspringbootreactjs.ems_backend.dtos.EmployeeDto;
 import com.learnspringbootreactjs.ems_backend.service.EmployeeService;
 
 import lombok.AllArgsConstructor;
-
+import java.util.*;
 @AllArgsConstructor
 @Controller
 @RequestMapping("/api/employees")
@@ -33,6 +33,13 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeDto> getEmployee(@PathVariable("id") Long empId){
 		EmployeeDto empDto = empService.getEmployee(empId);
 		return ResponseEntity.ok(empDto);
+	}
+	
+	//Rest endpoint for get all employees
+	@GetMapping
+	public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
+		List<EmployeeDto> employees = empService.getAllEmployees();
+		return ResponseEntity.ok(employees);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.learnspringbootreactjs.ems_backend.service.serviceimpl;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import com.learnspringbootreactjs.ems_backend.repositories.EmployeeRepository;
 import com.learnspringbootreactjs.ems_backend.service.EmployeeService;
 
 import lombok.AllArgsConstructor;
-
+import java.util.*;
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService{
@@ -33,6 +34,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		Employee fetchedEmp = empRepo.findById(empId).orElseThrow(() -> new EmployeeNotFoundException("Employee doesn't exist for this empID"+ empId));
 		
 		return EmployeeMapper.mapToEmployeeDto(fetchedEmp);
+	}
+
+	@Override
+	public List<EmployeeDto> getAllEmployees() {
+		// TODO Auto-generated method stub
+		List<Employee> employees = empRepo.findAll();
+		return employees.stream().map((employee) -> EmployeeMapper.mapToEmployeeDto(employee)).collect(Collectors.toList());
 	}
 
 }
