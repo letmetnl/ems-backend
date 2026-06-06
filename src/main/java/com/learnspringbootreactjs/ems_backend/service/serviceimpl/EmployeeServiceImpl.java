@@ -1,6 +1,5 @@
 package com.learnspringbootreactjs.ems_backend.service.serviceimpl;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -53,6 +52,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		// save/update to db
 		Employee updatedEmployee = empRepo.save(employee);
 		return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
+	}
+
+	@Override
+	public void deleteEmployee(Long empId) {
+		// TODO Auto-generated method stub
+		Employee employee= empRepo.findById(empId).orElseThrow(()->new EmployeeNotFoundException("Employee doen't exist for the given Id "+ empId));
+		empRepo.deleteById(empId);
 	}
 	
 	

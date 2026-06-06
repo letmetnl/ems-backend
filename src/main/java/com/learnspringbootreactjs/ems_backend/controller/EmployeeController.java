@@ -3,6 +3,7 @@ package com.learnspringbootreactjs.ems_backend.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,13 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long empId,@RequestBody EmployeeDto updatedEmployeeDto){
 		EmployeeDto updatedEmployee = empService.updateEmployee(empId, updatedEmployeeDto);
 		return ResponseEntity.ok(updatedEmployee);
+	}
+	
+	// Rest endpoint for deleting employee
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long empId) {
+		empService.deleteEmployee(empId);
+		return ResponseEntity.ok("Employee is deleted successfully");
 	}
 
 }
